@@ -31,14 +31,14 @@ class Directory extends Component {
           title: "womens",
           imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
           size: "large",
-          linkUrl: "womens"
+          linkUrl: "women"
         },
         {
           id: 5,
           title: "mens",
           imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
           size: "large",
-          linkUrl: "mens"
+          linkUrl: "men"
         }
       ]
     };
