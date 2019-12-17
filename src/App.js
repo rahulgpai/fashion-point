@@ -5,7 +5,10 @@ import HomePage from "./pages/homepage/homepage";
 import ShopPage from "./pages/shoppage/shoppage";
 import Header from "./components/header/header";
 import SignInSignUpForms from "./pages/signin-signup-form/signin-signup-form";
-import { auth } from "./config/firebase/firebaseConfig.js";
+import {
+  auth,
+  createUserProfileDocument
+} from "./config/firebase/firebaseConfig.js";
 
 const HatsPage = () => <div>This is a hat's page</div>;
 const JacketsPage = () => <div>This is a jacket's page</div>;
@@ -25,9 +28,23 @@ class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapShot => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          });
+
+          console.log(this.state.currentUser);
+        });
+      }
       this.setState({
-        currentUser: user
+        currentUser: userAuth
       });
     });
   }
