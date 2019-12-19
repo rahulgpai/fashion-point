@@ -15,6 +15,10 @@ const mapDispatchToProps = dispatch => ({
   toggleCartVisibility: () => dispatch(toggleCartVisibility())
 });
 
+// const mapStateToProps = state => ({
+//   cart: state.cart
+// });
+
 export default connect(
   null,
   mapDispatchToProps
