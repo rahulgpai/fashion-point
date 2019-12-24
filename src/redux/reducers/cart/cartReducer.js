@@ -11,9 +11,11 @@ const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case cartActionTypes.TOGGLE_CART_VISIBILITY:
       return {
+        ...state,
         cartVisible: !cartVisible
       };
     case cartActionTypes.ADD_ITEM_TO_CART:
+      console.log(state);
       return {
         ...state,
         cartItems: utilsAddItemToCart(cartItems, action.payload)
