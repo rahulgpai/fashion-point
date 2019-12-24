@@ -11,6 +11,9 @@ import {
 } from "./config/firebase/firebaseConfig.js";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/actions/user/userActions";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "./reselect-selectors/user/user-selectors";
+import CheckoutPage from "./pages/checkout/checkout";
 
 const HatsPage = () => <div>This is a hat's page</div>;
 const JacketsPage = () => <div>This is a jacket's page</div>;
@@ -62,6 +65,7 @@ class App extends Component {
               )
             }
           />
+          <Route exact path="/checkout" component={CheckoutPage} />
           <Route path="/hats" component={HatsPage} />
           <Route path="/jackets" component={JacketsPage} />
           <Route path="/sneakers" component={SneakersPage} />
@@ -73,8 +77,8 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({
