@@ -1,60 +1,22 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import "../../styles/directory/directory.scss";
 import MenuItem from "../menu-item/menu-item";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectSections } from "../../reselect-selectors/directory/directory-selectors.js";
 
-class Directory extends Component {
-  constructor() {
-    super();
+const Directory = ({ sections }) => (
+  <Fragment>
+    <div className="directory-menu">
+      {sections.map(({ id, ...otherSectionProps }) => (
+        <MenuItem key={id} {...otherSectionProps} />
+      ))}
+    </div>
+  </Fragment>
+);
 
-    this.state = {
-      sections: [
-        {
-          id: 1,
-          title: "hats",
-          imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-          linkUrl: "hats"
-        },
-        {
-          id: 2,
-          title: "jackets",
-          imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-          linkUrl: "jackets"
-        },
-        {
-          id: 3,
-          title: "sneakers",
-          imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-          linkUrl: "sneakers"
-        },
-        {
-          id: 4,
-          title: "womens",
-          imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
-          size: "large",
-          linkUrl: "women"
-        },
-        {
-          id: 5,
-          title: "mens",
-          imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
-          size: "large",
-          linkUrl: "men"
-        }
-      ]
-    };
-  }
+const mapStateToProps = createStructuredSelector({
+  sections: selectSections
+});
 
-  render() {
-    return (
-      <Fragment>
-        <div className="directory-menu">
-          {this.state.sections.map(({ id, ...otherSectionProps }) => (
-            <MenuItem key={id} {...otherSectionProps} />
-          ))}
-        </div>
-      </Fragment>
-    );
-  }
-}
-
-export default Directory;
+export default connect(mapStateToProps)(Directory);

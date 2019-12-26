@@ -7,8 +7,6 @@ import { selectCartItemsCount } from "../../reselect-selectors/cart/cart-selecto
 import { createStructuredSelector } from "reselect";
 
 const CartIcon = ({ toggleCartVisibility, itemCount }) => {
-  console.log(itemCount);
-
   return (
     <div className="cart-icon" onClick={toggleCartVisibility}>
       <ShoppingIcon className="shopping-icon" />

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import "../../styles/checkout/checkout.scss";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
